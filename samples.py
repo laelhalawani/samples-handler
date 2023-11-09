@@ -165,8 +165,5 @@ class Samples:
             s = Samples(split_samples[i], name=name, sample_input_key=self._input_key, sample_output_key=self._target_key, check_samples=False)
             samples.append(s)
         return samples
-
-    def count(self):
-        return len(self.all_samples)
     
 
