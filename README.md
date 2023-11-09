@@ -48,11 +48,14 @@ from samples import Samples
 
 ## Samples Class Usage Guide
 ### Initialize a Samples Object
-You can initialize a `Samples` object by providing a list of samples or a path to a JSON file containing the samples. You can also specify the keys for the input and target data in each sample.
+You can quickly initialize `Samples` object by providing a list of samples or a path to a JSON file containing the samples. 
 ```python
-samples = Samples(samples_list_or_path, name="", sample_input_key="input", sample_output_key="target", check_samples=True)
+samples = Samples(samples_list_or_path='./samples.json')
 ```
-
+You can also specify the keys for the input and target data in each sample, and if it's different than the desired for example `"input"` and `"output"`.
+```python
+samples = Samples(samples_list_or_path='./samples.json', name="my samples", sample_input_key="input", sample_output_key="target")
+```
 ### Get All Samples
 You can get all samples in the dataset using the `get_all_samples` method.
 ```python
@@ -126,9 +129,9 @@ Loads samples from a JSON file. Takes the path to the JSON file containing the s
 ### validate_samples
 *Method signature:*
 ```python
-def validate_samples(padded=True):
+def validate_samples(desired_len=0):
 ```
-Checks the validity of the samples. Raises a KeyError if a sample is missing either "input" or "target" data, and if `padded` is set to `True` a `ValueError` if the length of the input and target data in a sample do not match.
+Checks the validity of the samples. Raises a KeyError if a sample is missing either "input" or "target" data, and `desired_len` is set to value other than `0` a `ValueError` is raised if the length of the input and target data in a sample do not match the `desired_len`.
 
 ### get_all_samples
 *Method signature:*

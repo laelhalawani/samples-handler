@@ -26,7 +26,7 @@ class Samples:
     count(): Returns the number of samples in the set.
     """
 class Samples:
-    def __init__(self, samples_list_or_path, name="", sample_input_key="input", sample_output_key="target", validate_samples_len=False):
+    def __init__(self, samples_list_or_path, name="", sample_input_key="input", sample_output_key="target"):
         """
         Initializes a Samples object.
 
@@ -51,7 +51,7 @@ class Samples:
         self.current_training_id = None
         self.current_evaluation_id = None
         print(f"Created Samples object with {len(self.all_samples)} {name} samples")
-        self.validate_samples(validate_samples_len)
+        self.validate_samples()
 
     def __len__(self):
         return len(self.all_samples)
@@ -85,27 +85,25 @@ class Samples:
             samples = json.load(f)
         return samples
 
-    def validate_samples(self, padded=True):
+    def validate_samples(self, desired_len=0):
         """
         Check that all samples have the same length and contain both input and target data.
-
+        Args:
+            desired_len (int, optional): The desired length of the samples. Defaults to 0.
         Raises:
             KeyError: If a sample is missing either "input" or "target" data.
-            ValueError: If the length of the input and target data in a sample do not match.
+            ValueError: If the samples do not have the same length as the desired length.
         """
-        sample_len = None
         for sample in self.all_samples:
             if not "input" in sample.keys() or not "target" in sample.keys():
                 print(sample)
                 raise KeyError("Missing input or target in sample")
-            elif padded:
+            elif desired_len > 0:
                 input_len = len(sample["input"])
                 output_len = len(sample["target"])
-                if sample_len is None:
-                    sample_len = input_len
-                elif sample_len != input_len or sample_len != output_len or input_len != output_len:
+                if input_len != desired_len or output_len != desired_len:
                     raise ValueError(f"Sample length mismatch between input and target: {sample_len} vs. {input_len} vs. {output_len}")
-                print(f"All samples have the same length: {sample_len}")
+                print(f"All samples have the same length: {desired_len}")
    
     def get_all_samples(self):
         """
