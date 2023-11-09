@@ -43,7 +43,7 @@ You can then import the class into your Python script
 using 
 
 ```python
-from samples import Samples
+from samples_handler import Samples
 ```
 
 ## Samples Class Usage Guide
