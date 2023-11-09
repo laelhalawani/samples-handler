@@ -25,7 +25,6 @@ class Samples:
     split_samples_by_proportion(proportions_list=[0.7, 0.2, 0.1], names_list=["train", "eval", "test"], shuffle=1): Splits the samples into multiple sets by proportion.
     count(): Returns the number of samples in the set.
     """
-class Samples:
     def __init__(self, samples_list_or_path, name="", sample_input_key="input", sample_output_key="target"):
         """
         Initializes a Samples object.
@@ -102,7 +101,7 @@ class Samples:
                 input_len = len(sample["input"])
                 output_len = len(sample["target"])
                 if input_len != desired_len or output_len != desired_len:
-                    raise ValueError(f"Sample length mismatch between input and target: {sample_len} vs. {input_len} vs. {output_len}")
+                    raise ValueError(f"Sample length mismatch between input and target: {desired_len} vs. {input_len} vs. {output_len}")
                 print(f"All samples have the same length: {desired_len}")
    
     def get_all_samples(self):
