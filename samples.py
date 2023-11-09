@@ -26,7 +26,7 @@ class Samples:
     count(): Returns the number of samples in the set.
     """
 class Samples:
-    def __init__(self, samples_list_or_path, name="", sample_input_key="input", sample_output_key="target", check_samples=True):
+    def __init__(self, samples_list_or_path, name="", sample_input_key="input", sample_output_key="target", validate_samples_len=False):
         """
         Initializes a Samples object.
 
@@ -35,7 +35,7 @@ class Samples:
             name (str, optional): A name for the Samples object. Defaults to "".
             sample_input_key (str, optional): The key for the input data in each sample. Defaults to "input".
             sample_output_key (str, optional): The key for the target data in each sample. Defaults to "target".
-            check_samples (bool, optional): Whether to check the validity of the samples. Defaults to True.
+            valdiate_samples_len (bool, optional): Whether to check the the samples have equal len durng validity check of the samples. Defaults to False.
         """
         self.index = 0
         self.name = name
@@ -51,8 +51,7 @@ class Samples:
         self.current_training_id = None
         self.current_evaluation_id = None
         print(f"Created Samples object with {len(self.all_samples)} {name} samples")
-        if check_samples:
-            self.check_samples()
+        self.validate_samples(validate_samples_len)
 
     def __len__(self):
         return len(self.all_samples)
@@ -86,7 +85,7 @@ class Samples:
             samples = json.load(f)
         return samples
 
-    def check_samples(self):
+    def validate_samples(self, padded=True):
         """
         Check that all samples have the same length and contain both input and target data.
 
@@ -99,14 +98,14 @@ class Samples:
             if not "input" in sample.keys() or not "target" in sample.keys():
                 print(sample)
                 raise KeyError("Missing input or target in sample")
-            else:
+            elif padded:
                 input_len = len(sample["input"])
                 output_len = len(sample["target"])
                 if sample_len is None:
                     sample_len = input_len
                 elif sample_len != input_len or sample_len != output_len or input_len != output_len:
                     raise ValueError(f"Sample length mismatch between input and target: {sample_len} vs. {input_len} vs. {output_len}")
-        print(f"All samples have the same length: {sample_len}")
+                print(f"All samples have the same length: {sample_len}")
    
     def get_all_samples(self):
         """
@@ -162,7 +161,7 @@ class Samples:
                 name = names_list[i]
             else:
                 name = f"{i}"
-            s = Samples(split_samples[i], name=name, sample_input_key=self._input_key, sample_output_key=self._target_key, check_samples=False)
+            s = Samples(split_samples[i], name=name, sample_input_key=self._input_key, sample_output_key=self._target_key, validate_samples=False)
             samples.append(s)
         return samples
     

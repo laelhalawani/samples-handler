@@ -81,7 +81,7 @@ for sample in samples:
 ### init
 *Method signature:*
 ```python
-def __init__(samples_list_or_path, name="", sample_input_key="input", sample_output_key="target", check_samples=True): 
+def __init__(samples_list_or_path, name="", sample_input_key="input", sample_output_key="target", validate_samples_len=False): 
 ```
 Initializes a Samples object. Takes a list of samples or a path to a file containing samples, a name for the Samples object, the key for the input data in each sample, the key for the target data in each sample, and a flag indicating whether to check the validity of the samples.
 
@@ -120,12 +120,12 @@ def load_samples(samples_json_file):
 ```
 Loads samples from a JSON file. Takes the path to the JSON file containing the samples and returns a list of samples loaded from the file.
 
-### check_samples
+### validate_samples
 *Method signature:*
 ```python
-def check_samples():
+def validate_samples(padded=True):
 ```
-Checks the validity of the samples. Raises a KeyError if a sample is missing either "input" or "target" data, and a ValueError if the length of the input and target data in a sample do not match.
+Checks the validity of the samples. Raises a KeyError if a sample is missing either "input" or "target" data, and if `padded` is set to `True` a `ValueError` if the length of the input and target data in a sample do not match.
 
 ### get_all_samples
 *Method signature:*
