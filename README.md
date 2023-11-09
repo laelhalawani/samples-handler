@@ -56,16 +56,19 @@ samples = Samples(samples_list_or_path, name="", sample_input_key="input", sampl
 ### Get All Samples
 You can get all samples in the dataset using the `get_all_samples` method.
 ```python
+samples = Samples('samples.json')
 all_samples = samples.get_all_samples()
 ```
 
 ### Split the Samples by Proportion
 You can split the samples into multiple subsets based on the given proportions using the `split_samples_by_proportion` method. This method returns a list of Samples objects, each containing a subset of the original samples. 
 ```python
+samples = Samples('samples.json')
 split_samples = samples.split_samples_by_proportion(proportions_list=[0.7, 0.2, 0.1], names_list=["train", "eval", "test"], shuffle=1)
 ```
 you can also use python's sequence unpacking to assign each part to a new variable, just keep the number of variables equal to number of splits
 ```python
+samples = Samples('samples.json')
 train, evaluate, test = samples.split_samples_by_proportion(proportions_list=[0.7, 0.2, 0.1], names_list=["train", "eval", "test"], shuffle=1)
 ```
 ### Iterate samples
