@@ -58,13 +58,11 @@ class Samples:
         return self
 
     def __next__(self):
-        # The __next__ method returns the next value from the iterator
         if self.index < len(self.all_samples):
             result = self.all_samples[self.index]
             self.index += 1
             return result
         else:
-            # Once all items are returned, the __next__ method raises a StopIteration exception
             raise StopIteration
     def __str__(self):
         return f'Samples( name: {self.name} | size: {len(self)})'
