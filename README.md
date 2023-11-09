@@ -40,8 +40,11 @@ To install the Samples hadnler, you can download the repository and open a comma
 pip install .
 ```
 You can then import the class into your Python script
-using `import samples` or `from samples import Samples`
+using 
+
+```python
 from samples import Samples
+```
 
 ## Samples Class Usage Guide
 ### Initialize a Samples Object
