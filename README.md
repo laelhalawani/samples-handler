@@ -22,7 +22,6 @@ The output can be a string or a list of elements such as token ids or tokens.
         "input":"iterable input sequence 1",
         "target":"iterable target squence 1", 
     },
-    ...
 ]
 ```
 or
@@ -32,7 +31,6 @@ or
         "input":[-999, -2, -1, 0],
         "target":[0, 0, 0, -1], 
     },
-    ...
 ]
 ```
 
