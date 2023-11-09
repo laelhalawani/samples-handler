@@ -36,11 +36,12 @@ or
 
 ## Installation
 To install the Samples hadnler, you can download the repository and open a command prompt in the extracted directory. Then, run the following command:
-`pip install .`
-You can then import the class into your Python script using the following line of code:
 ```python
-from samples import Samples
+pip install .
 ```
+You can then import the class into your Python script
+using `import samples` or `from samples import Samples`
+from samples import Samples
 
 ## Samples Class Usage Guide
 ### Initialize a Samples Object
